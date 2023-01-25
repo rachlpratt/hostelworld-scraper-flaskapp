@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hostel Price Explorer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">HOME</a>
+        <a href="{{ url_for('destinations') }}">DESTINATIONS</a>
+        <a href="{{ url_for('about') }}">ABOUT</a>
+    </nav>
+    {% block content %}{% endblock %}
+</body>
+</html>
