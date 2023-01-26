@@ -1,16 +1,32 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="UTF-8">
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
     <title>Hostel Price Explorer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-</head>
-<body>
-    <nav>
-        <a href="{{ url_for('index') }}">HOME</a>
-        <a href="{{ url_for('destinations') }}">DESTINATIONS</a>
-        <a href="{{ url_for('about') }}">ABOUT</a>
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ url_for('index') }}">Hostel Price Explorer</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('destinations') }}">Destinations</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+            </ul>
+        </div>
     </nav>
-    {% block content %}{% endblock %}
-</body>
-</html>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% block app_content %}{% endblock %}
+    </div>
+{% endblock %}
+
+
+
+
+
+
