@@ -16,3 +16,8 @@ def destinations():
 @app.route('/about')
 def about():
     return render_template('about.html', title='About')
+
+
+@app.route('/random')
+def random():
+    return render_template('random.html', title='Random Destination')
