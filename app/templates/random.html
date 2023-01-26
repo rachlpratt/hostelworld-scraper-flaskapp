@@ -1,5 +1,39 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <h1>This is where the random destination will appear!</h1>
+    <style type="text/css">
+    .table {
+        margin: 0 auto;
+        width: 60%;
+    }
+    </style>
+    <h1>{{ city |title }}, {{ country |title }}</h1>
+    <br>
+    <h3>The average hostel price in {{ city |title }} is ${{ avg_price }} per night.</h3>
+    <br>
+    <h4>Here are some of the top hostels in {{ city |title }}:</h4>
+    <br><br>
+    <table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th class="text-center">Hostel Name</th>
+            <th class="text-center">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for hostel in hostels %}
+        <tr>
+        <td>{{ hostel[0] }}</td>
+        <td>${{ hostel[1] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    <br><br>
+    <h4>Generate another random destination:</h4>
+    <a href="{{ url_for('random') }}" class="btn btn-info" role="button">Random Destination</a>
+    <br><br>
+    <h4>Choose the destination yourself:</h4>
+    <a href="{{ url_for('destinations') }}" class="btn btn-primary" role="button">Choose Destination</a>
+    <br><br>
 {% endblock %}
