@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <h1>This is the destinations page!</h1>
+    <h1>Choose a Destination</h1>
+    <br><br>
+    <h3>Select a destination from the dropdown below to see hostel prices:</h3>
+    <br>
+    <form action="{{ url_for('destination') }}" method="post">
+        <select name="select_destination" class="Input">
+            {% for destination in destination_list %}
+            <option value="{{ destination[2] }}.{{ destination[1] }}">
+                {{ destination[2] |title }}, {{ destination[1] |title }}</option>
+            {% endfor %}
+        </select>
+        {{ form.submit() }}
+    </form>
 {% endblock %}

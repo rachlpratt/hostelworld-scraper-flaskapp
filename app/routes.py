@@ -1,6 +1,7 @@
 from app import app
-from flask import render_template
+from flask import render_template, request
 from random import choice
+from app.forms import SelectDestinationForm
 
 
 @app.route('/')
@@ -11,7 +12,12 @@ def index():
 
 @app.route('/destinations')
 def destinations():
-    return render_template('destinations.html', title='Destinations')
+    form = SelectDestinationForm()
+
+    # Will implement better list of destinations later
+    destination_list = [["asia", "japan", "tokyo"], ["europe", "france", "paris"], ["europe", "italy", "milan"]]
+
+    return render_template('destinations.html', title='Destinations', destination_list=destination_list, form=form)
 
 
 @app.route('/about')
@@ -31,7 +37,7 @@ def random():
     hostels = [["Hostel 1", 45], ["Hostel 2", 44], ["Hostel 3", 39], ["Hostel 4", 48], ["Hostel 5", 52],
                ["Hostel 6", 38], ["Hostel 7", 46], ["Hostel 8", 47], ["Hostel 9", 45], ["Hostel 10", 44]]
 
-    # Get average hostel price
+    # Get average hostel price - will need to convert EUR to USD
     sum_prices = 0
     for hostel in hostels:
         sum_prices += hostel[1]
@@ -41,6 +47,21 @@ def random():
                            avg_price=avg_price)
 
 
-@app.route('/destination')
+@app.route('/destination', methods=['GET', 'POST'])
 def destination():
-    return render_template('destination.html', title='Selected Destination')
+    # Get info from dropdown list
+    destination_data = list(request.form.values())
+    city, country = destination_data[0].split('.')
+    city, country = city.title(), country.title()
+
+    # Create fake hostel names and prices for now - will scrape this info later
+    hostels = [["Hostel 1", 45], ["Hostel 2", 44], ["Hostel 3", 39], ["Hostel 4", 48], ["Hostel 5", 52],
+               ["Hostel 6", 38], ["Hostel 7", 46], ["Hostel 8", 47], ["Hostel 9", 45], ["Hostel 10", 44]]
+
+    # Get average hostel price - will need to convert EUR to USD
+    sum_prices = 0
+    for hostel in hostels:
+        sum_prices += hostel[1]
+    avg_price = round(sum_prices / len(hostels))
+    return render_template('destination.html', title='Random Destination', hostels=hostels, country=country, city=city,
+                           avg_price=avg_price)
