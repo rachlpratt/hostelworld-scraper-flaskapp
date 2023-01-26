@@ -1,7 +1,7 @@
 {% extends 'bootstrap/base.html' %}
 
 {% block title %}
-    <title>Hostel Price Explorer</title>
+    {% if title %}{{ title }}{% else %}Hostel Price Explorer{% endif %}
 {% endblock %}
 
 {% block navbar %}
@@ -20,13 +20,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container text-center">
         {% block app_content %}{% endblock %}
     </div>
 {% endblock %}
-
-
-
-
-
-

@@ -1,7 +1,17 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <h1>This is the home page!</h1>
+    <h1>Welcome to the Hostel Price Explorer!</h1>
     <br>
-    <a href="{{ url_for('random') }}">Click for random destination</a>
+    <h2>Ready for your next travel adventure?</h2>
+    <h3>Not sure where to go?</h3>
+    <br><br>
+    <h4>Use the button below to see hostel prices for a random travel destination!</h4>
+    <br>
+    <a href="{{ url_for('random') }}" class="btn btn-info" role="button">Generate Destination</a>
+    <br><br>
+    <h4>If you would rather see hostel prices at a destination of your choice, use the button below:</h4>
+    <br>
+    <a href="{{ url_for('destination') }}" class="btn btn-primary" role="button">Choose Destination</a>
+    <br>
 {% endblock %}

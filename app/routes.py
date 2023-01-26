@@ -5,7 +5,7 @@ from flask import render_template
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', title='Home')
+    return render_template('index.html', title='Hostel Price Explorer')
 
 
 @app.route('/destinations')
@@ -21,3 +21,8 @@ def about():
 @app.route('/random')
 def random():
     return render_template('random.html', title='Random Destination')
+
+
+@app.route('/destination')
+def destination():
+    return render_template('destination.html', title='Selected Destination')
