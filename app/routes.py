@@ -15,7 +15,9 @@ def destinations():
     form = SelectDestinationForm()
 
     # Will implement better list of destinations later
-    destination_list = [["asia", "japan", "tokyo"], ["europe", "france", "paris"], ["europe", "italy", "milan"]]
+    destination_list = [["asia", "japan", "tokyo"], ["europe", "france", "paris"], ["europe", "italy", "milan"],
+                        ["north-america", "canada", "vancouver"], ["oceania", "australia", "sydney"],
+                        ["europe", "turkey", "istanbul"]]
 
     return render_template('destinations.html', title='Destinations', destination_list=destination_list, form=form)
 
@@ -29,7 +31,9 @@ def about():
 def random():
 
     # Simulate generating a random destination (microservice will do this later)
-    rand_dests = [["asia", "japan", "tokyo"], ["europe", "france", "paris"], ["europe", "italy", "milan"]]
+    rand_dests = [["asia", "japan", "tokyo"], ["europe", "france", "paris"], ["europe", "italy", "milan"],
+                  ["north-america", "canada", "vancouver"], ["oceania", "australia", "sydney"],
+                  ["europe", "turkey", "istanbul"]]
     rand_dest = choice(rand_dests)
     country, city = rand_dest[1], rand_dest[2]
 
