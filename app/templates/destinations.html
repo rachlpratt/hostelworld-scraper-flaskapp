@@ -8,8 +8,8 @@
     <form action="{{ url_for('destination') }}" method="post">
         <select name="select_destination" class="Input">
             {% for destination in destination_list %}
-            <option value="{{ destination[2] }}.{{ destination[1] }}">
-                {{ destination[2] |title }}, {{ destination[1] |title }}</option>
+            <option value="{{ destination[0] }}.{{ destination[1] }}">
+                {{ destination[0] |title }}, {{ destination[1] |title }}</option>
             {% endfor %}
         </select>
         {{ form.submit() }}

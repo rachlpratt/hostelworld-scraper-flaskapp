@@ -70,17 +70,17 @@ def get_continent(country):
 
 def format_url(city, country, continent):
     # For cities located in the UK, find specific nation (HostelWorld uses this in place of UK)
-    if country == "United Kingdom":
-        country = find_uk_nation(city)
+    if country.lower() == "united kingdom":
+        country = find_uk_nation(city.lower())
 
     # Rename cities that have different names on HostelWorld
     special_cities = ["new york city"]
-    if city in special_cities:
-        city = rename_special_city(city)
+    if city.lower() in special_cities:
+        city = rename_special_city(city.lower())
 
     # Rename countries that have different names on HostelWorld
-    special_countries = ["Hong Kong", "Taiwan"]
-    if country in special_countries:
+    special_countries = ["hong kong", "taiwan"]
+    if country.lower() in special_countries:
         country = rename_special_country(country)
 
     # Replace spaces with dashes and ensure everything is lowercase
