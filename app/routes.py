@@ -37,6 +37,8 @@ def random():
     # Obtain city, country, and continent of random destination
     city = random_destination[0]
     country = random_destination[1].title().replace("And", "and")
+    if country in ["England", "Northern Ireland", "Scotland", "Wales"]:
+        country = "United Kingdom"
     continent = get_continent(country)
 
     # Generate HostelWorld URL based on random destination
@@ -47,6 +49,14 @@ def random():
     properties = get_hostels(soup)
     hostels = get_hostel_names_and_prices(properties)
     avg_price = get_price_average(hostels)
+
+    # Set country back to UK nation if necessary
+    if country == "United Kingdom":
+        country = find_uk_nation(city.lower()).title()
+
+    # Fix USA capitalization
+    if country == "Usa":
+        country = "USA"
 
     return render_template('random.html', title='Random Destination', hostels=hostels, country=country, city=city,
                            avg_price=avg_price)
@@ -61,6 +71,8 @@ def destination():
     # Obtain city, country, and continent of selected destination
     city = city.title()
     country = country.title().replace("And", "and")
+    if country in ["England", "Northern Ireland", "Scotland", "Wales"]:
+        country = "United Kingdom"
     continent = get_continent(country)
 
     # Generate HostelWorld URL based on selected destination
@@ -71,6 +83,14 @@ def destination():
     properties = get_hostels(soup)
     hostels = get_hostel_names_and_prices(properties)
     avg_price = get_price_average(hostels)
+
+    # Set country back to UK nation if necessary
+    if country == "United Kingdom":
+        country = find_uk_nation(city.lower()).title()
+
+    # Fix USA capitalization
+    if country == "Usa":
+        country = "USA"
 
     return render_template('destination.html', title='Destination', hostels=hostels, country=country, city=city,
                            avg_price=avg_price)

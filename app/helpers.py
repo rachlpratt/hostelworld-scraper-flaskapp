@@ -1,7 +1,8 @@
-from random import choice
 import pycountry_convert as pc
 from bs4 import BeautifulSoup
 import requests
+import zmq
+import json
 
 
 def find_uk_nation(city):
@@ -28,14 +29,6 @@ def find_continent_of_special_country(country):
         return countries_with_continents[country]
 
 
-def rename_special_city(city):
-    # Rename city for HostelWorld URL
-    cities_renamed = {
-        "new york city": "new-york"
-    }
-    return cities_renamed[city]
-
-
 def rename_special_country(country):
     # Rename country for HostelWorld URL
     countries_renamed = {
@@ -46,12 +39,11 @@ def rename_special_country(country):
 
 
 def generate_random_destination():
-    # Simulating generating a random city & country pair (will be done by microservice)
-    destinations = [["tokyo", "japan"], ["paris", "france"], ["milan", "italy"], ["sydney", "australia"],
-                    ["new york city", "usa"], ["san francisco", "usa"], ["istanbul", "turkey"], ["athens", "greece"],
-                    ["hong kong", "hong kong"], ["taipei", "taiwan"], ["san juan", "puerto rico"],
-                    ["glasgow", "united kingdom"], ["dublin", "ireland"], ["auckland", "new zealand"]]
-    return choice(destinations)
+    context = zmq.Context()
+    socket = context.socket(zmq.REQ)
+    socket.connect("tcp://localhost:5556")
+    socket.send(b'Generate location')
+    return json.loads(socket.recv_json())
 
 
 def get_continent(country):
@@ -72,11 +64,6 @@ def format_url(city, country, continent):
     # For cities located in the UK, find specific nation (HostelWorld uses this in place of UK)
     if country.lower() == "united kingdom":
         country = find_uk_nation(city.lower())
-
-    # Rename cities that have different names on HostelWorld
-    special_cities = ["new york city"]
-    if city.lower() in special_cities:
-        city = rename_special_city(city.lower())
 
     # Rename countries that have different names on HostelWorld
     special_countries = ["hong kong", "taiwan"]
