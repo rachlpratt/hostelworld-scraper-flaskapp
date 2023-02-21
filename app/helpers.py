@@ -7,10 +7,8 @@ import json
 
 def find_uk_nation(city):
     # Return proper UK nation for HostelWorld URL
-    nations = {"england": ["bath", "birmingham", "brighton", "bristol", "liverpool", "london", "manchester", "york"],
-               "scotland": ["edinburgh", "fort william", "glasgow", "inverness", "isle of skye"],
-               "wales": ["cardiff", "caernarfon", "swansea"],
-               "northern ireland": ["belfast", "ballycastle"]}
+    nations = {"england": ["london"],
+               "scotland": ["edinburgh"]}
     for key in nations.keys():
         if city in nations[key]:
             return key
@@ -18,24 +16,10 @@ def find_uk_nation(city):
 
 def find_continent_of_special_country(country):
     # Return proper continent for HostelWorld URL
-    countries_with_continents = {
-        "Turkey": "europe",
-        "Aruba": "south-america",
-        "Martinique": "south-america",
-        "Puerto Rico": "south-america",
-        "Usa": "north-america"
-    }
+    countries_with_continents = {"Turkey": "europe",
+                                 "Usa": "north-america"}
     if country in countries_with_continents:
         return countries_with_continents[country]
-
-
-def rename_special_country(country):
-    # Rename country for HostelWorld URL
-    countries_renamed = {
-        "Hong Kong": "hong-kong-china",
-        "Taiwan": "taiwan-china"
-    }
-    return countries_renamed[country]
 
 
 def generate_random_destination():
@@ -48,7 +32,7 @@ def generate_random_destination():
 
 def get_continent(country):
     # Get continent for countries that have unexpected continent on HostelWorld
-    special_countries = ["Turkey", "Aruba", "Martinique", "Puerto Rico", "Usa", "US Virgin Islands"]
+    special_countries = ["Turkey", "Usa"]
     if country in special_countries:
         continent = find_continent_of_special_country(country)
 
@@ -64,11 +48,6 @@ def format_url(city, country, continent):
     # For cities located in the UK, find specific nation (HostelWorld uses this in place of UK)
     if country.lower() == "united kingdom":
         country = find_uk_nation(city.lower())
-
-    # Rename countries that have different names on HostelWorld
-    special_countries = ["hong kong", "taiwan"]
-    if country.lower() in special_countries:
-        country = rename_special_country(country)
 
     # Replace spaces with dashes and ensure everything is lowercase
     continent = continent.lower().replace(" ", "-")
@@ -98,7 +77,7 @@ def get_hostels(soup):
     # Get first 10 properties on page, excluding featured properties
     featured_list = soup.find(class_="featured-list")
     if not featured_list:
-        start_index = 0                     # Will start from first hostel on page if no featured properties
+        start_index = 0
     else:
         featured_properties = []
         featured_list = featured_list.find_all(class_="property-card")

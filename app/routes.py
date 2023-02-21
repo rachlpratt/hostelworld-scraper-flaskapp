@@ -15,10 +15,9 @@ def destinations():
     form = SelectDestinationForm()
 
     # Will implement better list of destinations later
-    destination_list = [["tokyo", "japan"], ["paris", "france"], ["milan", "italy"], ["sydney", "australia"],
-                    ["new york city", "usa"], ["san francisco", "usa"], ["istanbul", "turkey"], ["athens", "greece"],
-                    ["hong kong", "hong kong"], ["taipei", "taiwan"], ["san juan", "puerto rico"],
-                    ["glasgow", "united kingdom"], ["dublin", "ireland"], ["auckland", "new zealand"]]
+    destination_list = [["tokyo", "japan"], ["paris", "france"], ["rome", "italy"], ["sydney", "australia"],
+                        ["new york city", "usa"], ["san francisco", "usa"], ["istanbul", "turkey"],
+                        ["athens", "greece"], ["dublin", "ireland"], ["auckland", "new zealand"], ["vienna", "austria"]]
 
     return render_template('destinations.html', title='Destinations', destination_list=destination_list, form=form)
 
