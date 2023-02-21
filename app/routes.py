@@ -1,6 +1,7 @@
 from app import app
 from flask import render_template, request
 from app.forms import SelectDestinationForm
+from app.cities import cities
 from app.helpers import *
 
 
@@ -12,12 +13,9 @@ def index():
 
 @app.route('/destinations')
 def destinations():
+    # Use SelectDestinationForm with cities as destination list
     form = SelectDestinationForm()
-
-    # Will implement better list of destinations later
-    destination_list = [["tokyo", "japan"], ["paris", "france"], ["rome", "italy"], ["sydney", "australia"],
-                        ["new york city", "usa"], ["san francisco", "usa"], ["istanbul", "turkey"],
-                        ["athens", "greece"], ["dublin", "ireland"], ["auckland", "new zealand"], ["vienna", "austria"]]
+    destination_list = cities
 
     return render_template('destinations.html', title='Destinations', destination_list=destination_list, form=form)
 
@@ -29,7 +27,6 @@ def about():
 
 @app.route('/random')
 def random():
-
     # Simulate generating a random destination (microservice will do this later)
     random_destination = generate_random_destination()
 
