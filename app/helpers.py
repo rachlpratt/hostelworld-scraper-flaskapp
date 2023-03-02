@@ -60,7 +60,7 @@ def format_url(city, country, continent):
 
 def convert_eur_to_usd(price):
     # Convert price in EUR to USD
-    conversion_rate = 1.0673
+    conversion_rate = 1.05899
     price = float(price)
     price = int(price * conversion_rate)
     return price

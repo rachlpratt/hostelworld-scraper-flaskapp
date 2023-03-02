@@ -89,4 +89,4 @@ def destination():
         country = "USA"
 
     return render_template('destination.html', title='Destination', hostels=hostels, country=country, city=city,
-                           avg_price=avg_price)
+                           avg_price=avg_price, url=url)
