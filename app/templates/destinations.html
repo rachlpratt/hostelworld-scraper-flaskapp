@@ -2,16 +2,25 @@
 
 {% block app_content %}
     <h1>Choose a Destination</h1>
+    <br>
+    <img src="/static/timo-stern-iUBgeNeyVy8-unsplash.jpg" style="width:25%"/>
+    <figcaption style="font-size:10px">Photo by Timo Stern on Unsplash</figcaption>
     <br><br>
     <h3>Select a destination from the dropdown below to see hostel prices:</h3>
     <br>
     <form action="{{ url_for('destination') }}" method="post">
-        <select name="select_destination" class="Input">
+        <select name="select_destination" class="Input" style="height: 27px">
             {% for destination in destination_list %}
-            <option value="{{ destination[0] }}.{{ destination[1] }}">
+                {% if destination[1] == "usa" %}
+                    <option value="{{ destination[0] }}.{{ destination[1] }}">
+                {{ destination[0] |title }}, USA</option>
+                {% else %}
+                    <option value="{{ destination[0] }}.{{ destination[1] }}">
                 {{ destination[0] |title }}, {{ destination[1] |title }}</option>
+                {% endif %}
             {% endfor %}
         </select>
         {{ form.submit() }}
     </form>
+    <br><br><br>
 {% endblock %}
