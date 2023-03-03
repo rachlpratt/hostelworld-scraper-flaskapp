@@ -25,7 +25,7 @@ def about():
     return render_template('about.html', title='About')
 
 
-@app.route('/random')
+@app.route('/random', methods=['GET', 'POST'])
 def random():
     # Simulate generating a random destination (microservice will do this later)
     random_destination = generate_random_destination()
@@ -55,7 +55,7 @@ def random():
         country = "USA"
 
     return render_template('random.html', title='Random Destination', hostels=hostels, country=country, city=city,
-                           avg_price=avg_price)
+                           avg_price=avg_price, url=url)
 
 
 @app.route('/destination', methods=['GET', 'POST'])

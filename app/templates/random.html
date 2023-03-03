@@ -12,7 +12,7 @@
     <h3>The average hostel price in {{ city }} is ${{ avg_price }} per night.</h3>
     <br>
     <h4>Here are some of the top hostels in {{ city }}:</h4>
-    <br><br>
+    <br>
     <table class="table table-striped table-bordered">
     <thead>
         <tr>
@@ -29,11 +29,14 @@
         {% endfor %}
     </tbody>
     </table>
-    <br><br>
+    <p><i>Please note that these prices may be off by up to $1 due to Hostelworld's currency conversion rate.</i></p>
+    <br>
+    <h4>Click <a href="{{ url }}">here</a> to see all of the hostels in {{city}} on <a href="https://www.hostelworld.com">Hostelworld.com.</a></h4>
+    <br>
     <h4>Generate another random destination:</h4>
     <a href="{{ url_for('random') }}" class="btn btn-info" role="button">Random Destination</a>
     <br><br>
     <h4>Choose the destination yourself:</h4>
     <a href="{{ url_for('destinations') }}" class="btn btn-primary" role="button">Choose Destination</a>
-    <br><br>
+    <br><br><br>
 {% endblock %}
